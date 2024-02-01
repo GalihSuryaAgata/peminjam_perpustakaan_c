@@ -51,7 +51,7 @@ class LoginController extends GetxController {
         if (response.statusCode == 200) {
           final ResponseLogin responseLogin = ResponseLogin.fromJson(response.data);
           await StorageProvider.write(StorageKey.status, 'logged');
-          await StorageProvider.write(StorageKey.idUser, "halo"/*response.data!.id.toString()*/);
+          await StorageProvider.write(StorageKey.idUser, responseLogin.data!.id.toString());
           Get.offAllNamed(Routes.HOME);
         } else {
           Get.snackbar("Sorry", "Login Gagal", backgroundColor: Colors.orange);
@@ -62,11 +62,11 @@ class LoginController extends GetxController {
       loading(false);
       if (e.response != null) {
         if (e.response?.data != null) {
-          Get.snackbar("Sorry", "${e.response?.data['message']}",
+          Get.snackbar("oke", "${e.response?.data['message']}",
               backgroundColor: Colors.orange);
         }
       } else {
-        Get.snackbar("Sorry", e.message ?? "", backgroundColor: Colors.red);
+        Get.snackbar("terserah", e.message ?? "", backgroundColor: Colors.red);
       }
     } catch (e) {
       loading(false);
