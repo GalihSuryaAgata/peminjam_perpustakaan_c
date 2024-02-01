@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -20,30 +21,33 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
             children: [
               Text('Buku yang dipinjam : ${Get.parameters['judul']}'),
               // DateTimePicker
-              TextFormField(
+              DateTimePicker(
+                icon: Icon(Icons.date_range_rounded),
                 controller: controller.tanggal_pinjamController,
-                decoration: InputDecoration(
-                  hintText: "Masukan Tanggal Pinjam",
-                ),
-                validator: (value) {
-                  if (value!.length < 2) {
-                    return "Tanggal pinjam tidak boleh kosong";
-                  }
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+                dateLabelText: 'Tambahkan Tanggal Pinjam',
+                dateMask: 'yyyy-MM-dd',
+                onChanged: (val) => print(val),
+                validator: (val) {
+                  print(val);
                   return null;
                 },
+                onSaved: (val) => print(val),
               ),
-              TextFormField(
-                // obscureText: true,
+              DateTimePicker(
+                icon: Icon(Icons.date_range_rounded),
                 controller: controller.tanggal_kembaliController,
-                decoration: InputDecoration(
-                  hintText: "Masukan Tanggal Kembali",
-                ),
-                validator: (value) {
-                  if (value!.length < 2) {
-                    return " Tanggal kembali tidak boleh kosong";
-                  }
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+                dateLabelText: 'Tambahkan Tanggal Kembali',
+                dateMask: 'yyyy-MM-dd',
+                onChanged: (val) => print(val),
+                validator: (val) {
+                  print(val);
                   return null;
                 },
+                onSaved: (val) => print(val),
               ),
               Obx(() => controller.loading.value
                   ? CircularProgressIndicator()
